@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const projectData = await Project.findAll({
-      include: [
+      include: [User,
         {
           model: User,
           attributes: ['name'],
@@ -22,9 +22,9 @@ router.get('/', async (req, res) => {
     console.log(JSON.stringify(projects))
 
     // Pass serialized data and session flag into template
-    res.render('homepage', { 
-      projects, 
-      logged_in: req.session.logged_in 
+    res.render('homepage', {
+      projects,
+      // logged_in: req.session.logged_in 
     });
   } catch (err) {
     res.status(500).json(err);
@@ -34,21 +34,14 @@ router.get('/', async (req, res) => {
 router.get('/project/:id', async (req, res) => {
   try {
     const projectData = await Project.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
+      include: [User,
         {
           model: Comment,
-          include: [
-            {
-              model: User,
-              attributes: ['name'],
-            },
+          include: [User
+
+          ],
+        },
       ],
-    },
-  ],
     });
 
     const project = projectData.get({ plain: true });

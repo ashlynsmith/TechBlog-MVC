@@ -5,12 +5,12 @@ class Project extends Model {}
 
 Project.init(
   {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+     id: {
+       type: DataTypes.INTEGER,
+       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
-    },
+       autoIncrement: true,
+     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -19,20 +19,20 @@ Project.init(
       type: DataTypes.STRING,
     },
    
-    user_id: {
-      type: DataTypes.INTEGER,
-      references: {
+     user_id: {
+       type: DataTypes.INTEGER,
+       references: {
         model: 'user',
-        key: 'id',
-      },
-    },
+         key: 'id',
+       },
+     },
   },
   {
     sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'project',
+     timestamps: false,
+     freezeTableName: true,
+     underscored: true,
+     modelName: 'project',
   }
 );
 
